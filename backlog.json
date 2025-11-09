@@ -1,0 +1,137 @@
+{
+  "project": "fish-macro",
+  "version": "0.1.0",
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Create project structure",
+      "description": "Set up functions/ directory and determine file organization for Fish functions",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "high",
+      "dependencies": []
+    },
+    {
+      "id": "T002",
+      "title": "Implement shared utilities",
+      "description": "Create utility functions: conflict detection (check if name exists as command/function/macro), function name validation, error messaging helpers",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "high",
+      "dependencies": ["T001"],
+      "references": ["D004", "D005"]
+    },
+    {
+      "id": "T003",
+      "title": "Implement main macro.fish router",
+      "description": "Create main 'macro' function that routes to subcommands (add, edit, list, remove, promote), handles help text and unknown commands",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "high",
+      "dependencies": ["T001"]
+    },
+    {
+      "id": "T004",
+      "title": "Implement macro add <name>",
+      "description": "Fetch last 50 commands from Fish history, open in $EDITOR, validate edited content is not empty, check for naming conflicts, generate Fish function file, save to ~/.config/fish/functions/",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "high",
+      "dependencies": ["T002", "T003"],
+      "references": ["D001", "D002", "D004", "D006"]
+    },
+    {
+      "id": "T005",
+      "title": "Implement macro edit <name>",
+      "description": "Validate macro exists, open function file in $EDITOR, handle save",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "medium",
+      "dependencies": ["T002", "T003"]
+    },
+    {
+      "id": "T006",
+      "title": "Implement macro list",
+      "description": "Scan ~/.config/fish/functions/ for fish-macro created functions, read function contents, format as 'name: command(s)'",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "medium",
+      "dependencies": ["T003"],
+      "references": ["D010"]
+    },
+    {
+      "id": "T007",
+      "title": "Implement macro remove <name>",
+      "description": "Validate macro exists, prompt for confirmation, delete function file from ~/.config/fish/functions/",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "medium",
+      "dependencies": ["T002", "T003"]
+    },
+    {
+      "id": "T008",
+      "title": "Implement macro promote <name> <new_name>",
+      "description": "Validate source exists, validate new name available (check conflicts), rename function, move file, delete original",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "medium",
+      "dependencies": ["T002", "T003"],
+      "references": ["D003", "D004"]
+    },
+    {
+      "id": "T009",
+      "title": "Create install.fish script",
+      "description": "Implement installation script that copies function files to ~/.config/fish/functions/, handle errors, provide feedback",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "low",
+      "dependencies": ["T004", "T005", "T006", "T007", "T008"],
+      "references": ["D008"]
+    },
+    {
+      "id": "T010",
+      "title": "Manual testing suite",
+      "description": "Test all commands with various edge cases: empty editor content, conflicting names, multi-line commands, special characters, non-existent macros",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "low",
+      "dependencies": ["T004", "T005", "T006", "T007", "T008"]
+    },
+    {
+      "id": "T011",
+      "title": "Update README with examples",
+      "description": "Add real usage examples, common workflows, troubleshooting section",
+      "status": "done",
+      "completed": "2025-11-05",
+      "priority": "low",
+      "dependencies": ["T010"]
+    }
+  ],
+  "questions": [],
+  "ideas": [
+    {
+      "title": "Auto-suggest macro creation",
+      "description": "Detect repeated command patterns and suggest macro creation",
+      "priority": "future"
+    },    {
+      "title": "Recording mode",
+      "description": "Enable recording mode for a command similar to what vim has with 'q' to start/stop recording macros",
+      "priority": "future"
+    },
+    {
+      "title": "Macro templates",
+      "description": "Pre-defined common macros (g for git status, d for docker, etc.)",
+      "priority": "future"
+    },
+    {
+      "title": "Macro sharing",
+      "description": "Export/import macros, community macro repository",
+      "priority": "future"
+    },
+    {
+      "title": "Interactive mode",
+      "description": "Add fzf/gum integration for interactive selection",
+      "priority": "v2"
+    }
+  ]
+}
